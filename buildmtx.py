@@ -1,4 +1,4 @@
-numbod = 7
+numbod = 9
 numdim = 3
 
 
@@ -52,8 +52,13 @@ out = derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec
 header = "\\documentclass{article}\n"
 header += "\\usepackage[margin=0pt]{geometry}\n"
 header += "\\usepackage{amsmath}\n"
+#header += "\\thispagestyle{empty}\n"
+#header += "\\pdfpageheight"+str(25 + 2*numbod**2)+"cm\n"
+#header += "\\pdfpagewidth"+str(25 + 2*numbod**2)+"cm\n"
+#header += "\\setlength{\\paperheight}{"+str(25 + 2*numbod**2)+"cm}\n"
+#header += "\\setlength{\\paperwidth}{"+str(25 + 2*numbod**2)+"cm}\n"
 header += "\\geometry{paperwidth="+str(10 + 1.25*numdim*numbod**2)+"cm, paperheight="+str(20 + 0.5*numbod*numdim)+"cm}\n"
-header += "\\title{System dynaics for "+str(numbod)+"-Body system in "+str(numdim)+" Dimensions with Newtonian Point-Masses}\n"
+header += "\\title{System Dynaics for "+str(numbod)+"-Body System in "+str(numdim)+" Dimensions with Newtonian Point-Masses (Nonlinear State Space Model)}\n"
 header += "\\author{Polaris via Python Code}\n"
 header += "\\begin{document}\n"
 header += "\\setlength{\\arraycolsep}{5pt}\n"
