@@ -1,5 +1,7 @@
-numbod = 10
+numbod = 7
 numdim = 3
+
+
 N = 2*numdim
 L = ["x", "y", "z"]
 
@@ -46,22 +48,25 @@ dynMtx += "\\end{bmatrix}"
 
 
 ## OUTPUT
-out = "$$"+derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec+"$$"
+out = derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec
 header = "\\documentclass{article}\n"
 header += "\\usepackage[margin=0pt]{geometry}\n"
 header += "\\usepackage{amsmath}\n"
-header += "\\thispagestyle{empty}\n"
-header += "\\pdfpageheight"+str(15 + numbod)+"cm\n"
-header += "\\pdfpagewidth"+str(15 + 1.25*numbod)+"cm\n"
+header += "\\geometry{paperwidth="+str(10 + 1.25*numdim*numbod**2)+"cm, paperheight="+str(20 + 0.5*numbod*numdim)+"cm}\n"
 header += "\\title{System dynaics for "+str(numbod)+"-Body system in "+str(numdim)+" Dimensions}\n"
 header += "\\author{Polaris's Code}\n"
-header += "\\begin{document}\n\\maketitle\n\n"
-footer = "\n\end{document}"
+header += "\\begin{document}\n"
+header += "\\setlength{\\arraycolsep}{5pt}\n"
+header += "\\setcounter{MaxMatrixCols}{+"+str(N*numbod+1)+"}\n\n"
+header += "\\maketitle\n\n"
+footer = "\n\\end{document}"
+
+
 
 f = open("Dynamics.text", "w")
-f.write(out)
+f.write("$$"+out+"$$")
 f.close()
 
 f = open("Dynamics.tex", "w")
-f.write(header+out+footer)
+f.write(header+"\\["+out+"\\]"+footer)
 f.close()
