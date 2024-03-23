@@ -1,5 +1,6 @@
-numbod = 9
+numbod = 12
 numdim = 3
+expanded = False
 
 
 N = 2*numdim
@@ -33,9 +34,13 @@ for targetnum in range(numbod):
 # add same-body gravity terms
 for bod in range(numbod):
     for dim in range(numdim):
-        cells[bod*N+dim+numdim][bod*N+dim] = ""
-        for sourcenum in range(numbod):
-            if bod != sourcenum: cells[bod*N+dim+numdim][bod*N+dim] += "-\\frac{Gm_{"+str(sourcenum+1)+"}}{r_{"+str(bod+1)+","+str(sourcenum+1)+"}^2}"
+        if expanded:
+            cells[bod*N+dim+numdim][bod*N+dim] = ""
+            for sourcenum in range(numbod):
+                if bod != sourcenum: cells[bod*N+dim+numdim][bod*N+dim] += "-\\frac{Gm_{"+str(sourcenum+1)+"}}{r_{"+str(bod+1)+","+str(sourcenum+1)+"}^2}"
+        else:
+            cells[bod*N+dim+numdim][bod*N+dim] = "\\displaystyle\\sum_{n=1,n\\ne"+str(bod+1)+"}^{"+str(numbod)+"}\\frac{-Gm_n}{r_{"+str(bod+1)+",n}^2}"
+            
 # construct the mtx
 for row in range(N*numbod):
     for col in range(N*numbod):
@@ -57,7 +62,10 @@ header += "\\usepackage{amsmath}\n"
 #header += "\\pdfpagewidth"+str(25 + 2*numbod**2)+"cm\n"
 #header += "\\setlength{\\paperheight}{"+str(25 + 2*numbod**2)+"cm}\n"
 #header += "\\setlength{\\paperwidth}{"+str(25 + 2*numbod**2)+"cm}\n"
-header += "\\geometry{paperwidth="+str(10 + 1.25*numdim*numbod**2)+"cm, paperheight="+str(50 + 0.5*numbod*numdim)+"cm}\n"
+if expanded:
+    header += "\\geometry{paperwidth="+str(min(10+1.25*numdim*numbod**2,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
+else:
+    header += "\\geometry{paperwidth="+str(min(10+4*numdim*numbod,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
 header += "\\title{System Dynaics for "+str(numbod)+"-Body System in "+str(numdim)+" Dimensions with Newtonian Point-Masses (Nonlinear State Space Model)}\n"
 header += "\\author{Polaris via Python Code}\n"
 header += "\\begin{document}\n"
