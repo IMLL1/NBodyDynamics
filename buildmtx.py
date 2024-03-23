@@ -1,7 +1,8 @@
 numbod = 25         # Number of planetary bodies
 numdim = 3          # Number of dimensions total
 expanded = False    # Whether to expand summations in the dynamics matrix (don't do this for numbod > around 10)
-
+makeTxt = False     # Whether to putput txt file
+makeTex = True      # whether to putput Tex file
 
 N = 2*numdim
 L = ["x", "y", "z"]
@@ -74,37 +75,39 @@ vecDEs += "\\end{aligned}"
 out = derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec
 
 # output simple txt
-f = open("Dynamics.txt", "w")
-f.write("$$"+out+"$$")
-f.close()
+if makeTxt:
+    f = open("Dynamics.txt", "w")
+    f.write("$$"+out+"$$")
+    f.close()
 
 # Construct full LaTeX document
-header = "\\documentclass{article}\n"
-header += "\\usepackage[margin=25pt]{geometry}\n"
-header += "\\usepackage{amsmath}\n"
-if expanded:
-    header += "\\geometry{paperwidth="+str(min(10+1.25*numdim*numbod**2,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
-else:
-    header += "\\geometry{paperwidth="+str(min(10+4*numdim*numbod,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
-header += "\\title{System Dynaics for "+str(numbod)+"-Body System in "+str(numdim)+" Dimensions with Newtonian Point-Masses}\n"
-header += "\\author{Polaris via Python Code}\n"
-header += "\\begin{document}\n"
-header += "\\setlength{\\arraycolsep}{5pt}\n"
-header += "\\setcounter{MaxMatrixCols}{+"+str(N*numbod+1)+"}\n\n"
-header += "\\maketitle\n\n"
-footer = "\n\\end{document}"
+if makeTex:
+    header = "\\documentclass{article}\n"
+    header += "\\usepackage[margin=25pt]{geometry}\n"
+    header += "\\usepackage{amsmath}\n"
+    if expanded:
+        header += "\\geometry{paperwidth="+str(min(10+1.25*numdim*numbod**2,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
+    else:
+        header += "\\geometry{paperwidth="+str(min(10+4*numdim*numbod,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
+    header += "\\title{System Dynaics for "+str(numbod)+"-Body System in "+str(numdim)+" Dimensions with Newtonian Point-Masses}\n"
+    header += "\\author{Polaris via Python Code}\n"
+    header += "\\begin{document}\n"
+    header += "\\setlength{\\arraycolsep}{5pt}\n"
+    header += "\\setcounter{MaxMatrixCols}{+"+str(N*numbod+1)+"}\n\n"
+    header += "\\maketitle\n\n"
+    footer = "\n\\end{document}"
 
-fullDoc = header
-fullDoc += "\\section*{\\centering{Linearized State Space Model}}\n"
-fullDoc += "\\["+out+"\\]"
-fullDoc += "\\newpage\n"
-fullDoc += "\n\\section*{\\centering{First Order ODEs}}\n"
-fullDoc += "\\["+DEs+"\\]"
-fullDoc += "\\newpage\n"
-fullDoc += "\n\\section*{\\centering{Vector Form}}\n"
-fullDoc += "\\["+vecDEs+"\\]"
-fullDoc += footer
+    fullDoc = header
+    fullDoc += "\\section*{\\centering{Linearized State Space Model}}\n"
+    fullDoc += "\\["+out+"\\]"
+    fullDoc += "\\newpage\n"
+    fullDoc += "\n\\section*{\\centering{First Order ODEs}}\n"
+    fullDoc += "\\["+DEs+"\\]"
+    fullDoc += "\\newpage\n"
+    fullDoc += "\n\\section*{\\centering{Vector Form}}\n"
+    fullDoc += "\\["+vecDEs+"\\]"
+    fullDoc += footer
 
-f = open("Dynamics.tex", "w")
-f.write(fullDoc)
-f.close()
+    f = open("Dynamics.tex", "w")
+    f.write(fullDoc)
+    f.close()
