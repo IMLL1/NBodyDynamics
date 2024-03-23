@@ -1,13 +1,12 @@
-numbod = 25
-numdim = 3
-expanded = False
+numbod = 25         # Number of planetary bodies
+numdim = 3          # Number of dimensions total
+expanded = False    # Whether to expand summations in the dynamics matrix (don't do this for numbod > around 10)
 
 
 N = 2*numdim
 L = ["x", "y", "z"]
 
 derivOp = "\\frac{\operatorname{d}}{\operatorname{d}t}"
-
 stateVec = "\\begin{bmatrix}"
 for b in range(numbod):
     for d in range(numdim):
@@ -16,11 +15,9 @@ for b in range(numbod):
         stateVec += "\\dot{"+str(L[d])+"_{"+str(b+1)+"}}\\\\"
 stateVec += "\\end{bmatrix}"
 
-
 ## DYNAMICS MATRIX
 dynMtx = "\\begin{bmatrix}\n"
 cells = [["0"]*N*numbod for a in range(N*numbod)]
-
 # enter 1s
 for bod in range(numbod):
     for dim in range(numdim):
@@ -51,6 +48,7 @@ for row in range(N*numbod):
             dynMtx += " \\\\ \n"
 dynMtx += "\\end{bmatrix}"
 
+# Construct first-order DEs
 DEs = "\\begin{aligned}\n"
 for b in range(numbod):
     for d in range(numdim):
@@ -59,22 +57,28 @@ for b in range(numbod):
         for sourcenum in range(numbod):
             if b != sourcenum: DEs += "-\\frac{Gm_{"+str(sourcenum+1)+"}}{r_{"+str(b+1)+","+str(sourcenum+1)+"}^3}(x_{"+str(b+1)+"}-x_{"+str(sourcenum+1)+"})"
         DEs += "\\\\ \\\\ \n"
-    
 DEs += "\\end{aligned}"
 
+# construct second-orer vector DEs
 vecDEs = "\\begin{aligned}\n"
 for b in range(numbod):
     vecDEs += "\\mathbf{r}_{"+str(b+1)+"}''&="
     for sourcenum in range(numbod):
         if b != sourcenum: vecDEs += "-\\frac{Gm_{"+str(sourcenum+1)+"}\\left(\\mathbf{r}_{"+str(b+1)+"}-\\mathbf{r}_{"+str(sourcenum+1)+"}\\right)}{\\left|\\mathbf{r}_{"+str(b+1)+"}-\\mathbf{r}_{"+str(sourcenum+1)+"}\\right|^3}"
     vecDEs += "\\\\ \\\\ \n"
-    
 vecDEs += "\\end{aligned}"
     
 
 
 ## OUTPUT
 out = derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec
+
+# output simple txt
+f = open("Dynamics.txt", "w")
+f.write("$$"+out+"$$")
+f.close()
+
+# Construct full LaTeX document
 header = "\\documentclass{article}\n"
 header += "\\usepackage[margin=25pt]{geometry}\n"
 header += "\\usepackage{amsmath}\n"
@@ -89,10 +93,6 @@ header += "\\setlength{\\arraycolsep}{5pt}\n"
 header += "\\setcounter{MaxMatrixCols}{+"+str(N*numbod+1)+"}\n\n"
 header += "\\maketitle\n\n"
 footer = "\n\\end{document}"
-
-f = open("Dynamics.text", "w")
-f.write("$$"+out+"$$")
-f.close()
 
 fullDoc = header
 fullDoc += "\\section*{\\centering{Linearized State Space Model}}\n"
