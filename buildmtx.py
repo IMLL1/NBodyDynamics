@@ -58,7 +58,7 @@ for b in range(numbod):
         DEs += derivOp+"\dot{"+str(L[d])+"_{"+str(b+1)+"}}&="
         for sourcenum in range(numbod):
             if b != sourcenum: DEs += "-\\frac{Gm_{"+str(sourcenum+1)+"}}{r_{"+str(b+1)+","+str(sourcenum+1)+"}^3}(x_{"+str(b+1)+"}-x_{"+str(sourcenum+1)+"})"
-        DEs += "\\\\ \n"
+        DEs += "\\\\ \\\\ \n"
     
 DEs += "\\end{aligned}"
 
@@ -67,7 +67,7 @@ for b in range(numbod):
     vecDEs += "\\mathbf{r}_{"+str(b+1)+"}''&="
     for sourcenum in range(numbod):
         if b != sourcenum: vecDEs += "-\\frac{Gm_{"+str(sourcenum+1)+"}\\left(\\mathbf{r}_{"+str(b+1)+"}-\\mathbf{r}_{"+str(sourcenum+1)+"}\\right)}{\\left|\\mathbf{r}_{"+str(b+1)+"}-\\mathbf{r}_{"+str(sourcenum+1)+"}\\right|^3}"
-    vecDEs += "\\\\ \n"
+    vecDEs += "\\\\ \\\\ \n"
     
 vecDEs += "\\end{aligned}"
     
@@ -78,11 +78,6 @@ out = derivOp+stateVec+"=\n"+dynMtx+"\n"+stateVec
 header = "\\documentclass{article}\n"
 header += "\\usepackage[margin=25pt]{geometry}\n"
 header += "\\usepackage{amsmath}\n"
-#header += "\\thispagestyle{empty}\n"
-#header += "\\pdfpageheight"+str(25 + 2*numbod**2)+"cm\n"
-#header += "\\pdfpagewidth"+str(25 + 2*numbod**2)+"cm\n"
-#header += "\\setlength{\\paperheight}{"+str(25 + 2*numbod**2)+"cm}\n"
-#header += "\\setlength{\\paperwidth}{"+str(25 + 2*numbod**2)+"cm}\n"
 if expanded:
     header += "\\geometry{paperwidth="+str(min(10+1.25*numdim*numbod**2,575))+"cm, paperheight="+str(min(30+1.5*numbod*numdim,575))+"cm}\n"
 else:
