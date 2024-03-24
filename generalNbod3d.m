@@ -83,7 +83,7 @@ end
 lg=legend(lgtxt,Interpreter=interp,Location="eastoutside", box="off");
 lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]"; 
 set(gca,'TickLabelInterpreter',interp)
-ttle=title(numbods+"-Body Sim", Interpreter=interp); axis equal;grid on;
+title(numbods+"-Body Sim", Interpreter=interp); axis equal;grid on;
 
 if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
