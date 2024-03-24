@@ -1,4 +1,5 @@
 Stable six body (for 2 years):
+m = [mE 0.7*mE 0.9*mE 0.8*mE, 0.75*mE, 0.85*mE];
 r1init = [0;0;0];           v1init = [0;0;0];
 r2init = [0;-9e8;9e8];      v2init = [100;-300;-900];
 r3init = [13e8;-4e8;1e8];   v3init = [-300;-200;300];
