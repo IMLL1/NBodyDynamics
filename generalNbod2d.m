@@ -100,7 +100,7 @@ end
 
 pause; tic;
 
-animation = VideoWriter("animation"+string(datetime, "yyyy-MM-dd-hhmmss")+".mp4",'MPEG-4');      % ANIMATIONCOMMENT
+animation = VideoWriter("animation_"+string(datetime, "yyyy-MM-dd-hhmmss")+".mp4",'MPEG-4');      % ANIMATIONCOMMENT
 animation.FrameRate = fps; animation.Quality=100; open(animation);      % ANIMATIONCOMMENT
 sp = (length(t)-1)/(fps*tEnd/tScale); % frames (sim) per frame (display)
 for idx=sp:sp:length(t)
