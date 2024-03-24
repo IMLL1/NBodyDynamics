@@ -64,11 +64,14 @@ colors = hsv2rgb([H, ones(size(H)), (.75+0.25*useDarkMode)*ones(size(H))]); %col
 figure;
 colororder(colors)
 plot(x, y, '-'); ax=gca;
-lgtxt = [];
+lgtxt = {};
 for idx=1:numbods
-    lgtxt = [lgtxt, "$$r_{"+idx+"}(t)$$"];
+    mExp = floor(log10(m(idx))); mCoef = round(m(idx)/10^mExp, 3);
+    lgtxt{end+1} = "$$"+mCoef+"\times 10^{"+mExp+"}$$";
 end
-legend(lgtxt, Interpreter=interp); set(gca,'TickLabelInterpreter',interp)
+lg=legend(lgtxt,Interpreter=interp,Location="eastoutside", box="off");
+lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]"; 
+set(gca,'TickLabelInterpreter',interp)
 title("Body Locations", Interpreter=interp); axis equal;
 xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$) [km]", Interpreter=interp); grid on;
 
@@ -76,6 +79,7 @@ if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
     set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');
     lg.Title.Color='w'; ax.Title.Color='w';
+    set(lg, 'textcolor','w')
 end
 
 xl = xlim; yl=ylim;
@@ -90,12 +94,16 @@ set(gca,'TickLabelInterpreter',interp)
 for idx=1:numbods
     al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:));
 end
+lg=legend(["", lgtxt],Interpreter=interp,Location="eastoutside", box="off");
+lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";
+
 
 if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
     set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');
     lg.Title.Color='w'; animAx.Title.Color='w'; animAx.Subtitle.Color='w';
-    set(lg,'textcolor','w'); set(objs,'color','w');
+    set(lg,'textcolor','w');
+    set(objs,'color','w');
 end
 
 pause; tic;
