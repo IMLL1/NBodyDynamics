@@ -3,9 +3,9 @@ clc; clear; close all;
 
 mSun = 1.989e30;
 m = [mSun/3 mSun/3 mSun/3 mSun/3];
-r1init = [1e9;0]; r2init = [0;1e8]; r3init = [-1e9;0];  r4init = [0;-1e8];
-v1init = [0;-5]; v2init = [4.6;0];  v3init = [0;5]; v4init = [-4.6;0];
-svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init];
+r1 = [1e9;0]; r2 = [0;1e8]; r3 = [-1e9;0];  r4 = [0;-1e8];
+v1 = [0;-5]; v2 = [4.6;0];  v3 = [0;5]; v4 = [-4.6;0];
+sv = [r1;v1;r2;v2;r3;v3;r4;v4];
 % you can hardcode this. Base distance unit is km
 
 tEnd = seconds(years(50));    % sim for 50 years
@@ -28,12 +28,12 @@ useTex = true;  % whether to use tex labels (otherwise MATLAB labels)
 dt = (tEnd/(fps*tEnd/tScale))/ceil((tEnd/(fps*tEnd/tScale))/dt);
 
 numbods = length(m);
-if(numbods ~= length(svinit)/4)
+if(numbods ~= length(sv)/4)
     error("Improper inputs. Check to make sure your state vector has 4x as many elements as your masses");
 end
 
 ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-5);
-[t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, svinit, ops);
+[t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, sv, ops);
 
 %% Prepare plots
 x = zeros(length(t),numbods);
