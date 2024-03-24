@@ -4,13 +4,13 @@ clc; clear; close all;
 %---ial Conditions-----------------------------------------------------
 mE = 5.972e24; % Earth mass
 m = [mE 0.7*mE 0.9*mE 0.8*mE, 0.75*mE, 0.85*mE];
-r1init = [0;0;0];           v1init = [0;0;0];
-r2init = [0;-9e8;9e8];      v2init = [100;-300;-900];
-r3init = [13e8;-4e8;1e8];   v3init = [-300;-200;300];
-r4init = [-12e8;5e7;-9e8];  v4init = [-800;200;400];
-r5init = [1e9;1.2e9;-6e8];  v5init = [80;-900;50];
-r6init = [-1e8;7e8;1.2e9];    v6init = [400;400;-500];
-svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init;r5init;v5init;r6init;v6init];
+r1 = [0;0;0];           v1 = [0;0;0];
+r2 = [0;-9e8;9e8];      v2 = [100;-300;-900];
+r3 = [13e8;-4e8;1e8];   v3 = [-300;-200;300];
+r4 = [-12e8;5e7;-9e8];  v4 = [-800;200;400];
+r5 = [1e9;1.2e9;-6e8];  v5 = [80;-900;50];
+r6 = [-1e8;7e8;1.2e9];    v6 = [400;400;-500];
+sv = [r1;v1;r2;v2;r3;v3;r4;v4;r5;v5;r6;v6];
 % you can hardcode this. SI base units
 
 %---Sim Times--------------------------------------------------------------

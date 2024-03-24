@@ -1,19 +1,19 @@
 Stable six body (for 2 years):
 m = [mE 0.7*mE 0.9*mE 0.8*mE, 0.75*mE, 0.85*mE];
-r1init = [0;0;0];           v1init = [0;0;0];
-r2init = [0;-9e8;9e8];      v2init = [100;-300;-900];
-r3init = [13e8;-4e8;1e8];   v3init = [-300;-200;300];
-r4init = [-12e8;5e7;-9e8];  v4init = [-800;200;400];
-r5init = [1e9;1.2e9;-6e8];  v5init = [80;-900;50];
-r6init = [-1e8;7e8;1.2e9];    v6init = [400;400;-500];
-svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init;r5init;v5init;r6init;v6init];
+r1 = [0;0;0];           v1 = [0;0;0];
+r2 = [0;-9e8;9e8];      v2 = [100;-300;-900];
+r3 = [13e8;-4e8;1e8];   v3 = [-300;-200;300];
+r4 = [-12e8;5e7;-9e8];  v4 = [-800;200;400];
+r5 = [1e9;1.2e9;-6e8];  v5 = [80;-900;50];
+r6 = [-1e8;7e8;1.2e9];    v6 = [400;400;-500];
+sv = [r1;v1;r2;v2;r3;v3;r4;v4;r5;v5;r6;v6];
 
 Stable four body with symmetry in 2d
 mSun = 1.989e30;
 m = [mSun/3 mSun/3 mSun/3 mSun/3];
-r1init = [1e9;0]; r2init = [0;1e8]; r3init = [-1e9;0];  r4init = [0;-1e8];
-v1init = [0;-5]; v2init = [4.6;0];  v3init = [0;5]; v4init = [-4.6;0];
-svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init];
+r1 = [1e9;0]; r2 = [0;1e8]; r3 = [-1e9;0];  r4 = [0;-1e8];
+v1 = [0;-5]; v2 = [4.6;0];  v3 = [0;5]; v4 = [-4.6;0];
+sv = [r1;v1;r2;v2;r3;v3;r4;v4];
 
 Stable for 2+ years in 3d; two large bodies orbiting outside a cluster of smaller ones:
 m = [mE 0.7*mE 0.9*mE 0.8*mE, 0.75*mE, 0.85*mE 10*mE 10*mE];
