@@ -82,7 +82,7 @@ xl = xlim; yl=ylim;
 %% Animation
 figure;
 colororder(colors)
-objs = plot(nan,nan, 'ko'); animAx = gca;
+objs = plot(nan,nan, 'ko','MarkerSize',3); animAx = gca;
 xlim(xl); ylim(yl);
 title("Body Locations", Interpreter=interp); subtitle("$$t=0$$ years", Interpreter=interp);
 xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$) [km]", Interpreter=interp);
@@ -94,8 +94,8 @@ end
 if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
     set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');
-    lg.Title.Color='w'; ax.Title.Color='w';
-    set(objs,'color','w')
+    lg.Title.Color='w'; animAx.Title.Color='w'; animAx.Subtitle.Color='w';
+    set(lg,'textcolor','w'); set(objs,'color','w');
 end
 
 pause; tic;

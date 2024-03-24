@@ -108,7 +108,8 @@ lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";
 if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
     set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');set(gca,'ZColor','w');
-    lg.Title.Color='w'; animAx.Title.Color='w'; set(lg,'textcolor','w')
+    lg.Title.Color='w'; animAx.Title.Color='w'; animAx.Subtitle.Color='w';
+    set(lg,'textcolor','w'); set(objs,'color','w');
 end
 
 pause; tic; xlim(xl);ylim(yl);zlim(zl);
