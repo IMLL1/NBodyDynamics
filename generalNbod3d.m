@@ -104,7 +104,7 @@ for idx=1:numbods
 end
 lg=legend(["", lgtxt],Interpreter=interp,Location="eastoutside", box="off");
 lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";
-
+view(az, el);
 if(useDarkMode)
     set(gcf, "Color", 'k'); set(gca,'Color','k');
     set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');set(gca,'ZColor','w');
