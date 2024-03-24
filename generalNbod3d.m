@@ -91,7 +91,7 @@ for idx=1:numbods
     al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:));
 end
 lg=legend(["", lgtxt],Interpreter=interp,Location="eastoutside", box="off");
-lg.ItemTokenSize=[10 0]; lg.Title.String="Masses [kg]";
+lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";
 pause; tic; xlim(xl);ylim(yl);zlim(zl);
 animation = VideoWriter("animation3d_"+string(datetime, "yyyy-MM-dd-hhmmss")+".mp4",'MPEG-4');      % ANIMATIONCOMMENT
 animation.FrameRate = fps; animation.Quality=100; open(animation);      % ANIMATIONCOMMENT
