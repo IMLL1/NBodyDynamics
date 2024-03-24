@@ -15,6 +15,7 @@ fps = 30;
 
 useCoM = true;  % whether to use CoM as origin
 useTex = true;  % whether to use tex labels (otherwise MATLAB labels)
+useDarkMode = true; % whether to use dark mode
 % Note: search for ANIMATIONCOMMENT for stuff to toggle based on whether
 % animating or not
 
@@ -58,11 +59,11 @@ else
     interp = "tex";
 end
 H = linspace(0,1-1/numbods,numbods)';   % hue
-colors = hsv2rgb([H, ones(size(H)), .75*ones(size(H))]); %color order
+colors = hsv2rgb([H, ones(size(H)), (.75+0.25*useDarkMode)*ones(size(H))]); %color order
 %% Paths
 figure;
 colororder(colors)
-plot(x, y, '-');
+plot(x, y, '-'); ax=gca;
 lgtxt = [];
 for idx=1:numbods
     lgtxt = [lgtxt, "$$r_{"+idx+"}(t)$$"];
@@ -70,6 +71,13 @@ end
 legend(lgtxt, Interpreter=interp); set(gca,'TickLabelInterpreter',interp)
 title("Body Locations", Interpreter=interp); axis equal;
 xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$) [km]", Interpreter=interp); grid on;
+
+if(useDarkMode)
+    set(gcf, "Color", 'k'); set(gca,'Color','k');
+    set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');
+    lg.Title.Color='w'; ax.Title.Color='w';
+end
+
 xl = xlim; yl=ylim;
 %% Animation
 figure;
@@ -82,6 +90,14 @@ set(gca,'TickLabelInterpreter',interp)
 for idx=1:numbods
     al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:));
 end
+
+if(useDarkMode)
+    set(gcf, "Color", 'k'); set(gca,'Color','k');
+    set(gca,'GridColor','w');set(gca,'XColor','w');set(gca,'YColor','w');
+    lg.Title.Color='w'; ax.Title.Color='w';
+    set(objs,'color','w')
+end
+
 pause; tic;
 
 animation = VideoWriter("animation"+string(datetime, "yyyy-MM-dd-hhmmss")+".mp4",'MPEG-4');      % ANIMATIONCOMMENT
