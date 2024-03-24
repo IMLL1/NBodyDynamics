@@ -1,0 +1,17 @@
+Stable six body (for 2 years):
+r1init = [0;0;0];           v1init = [0;0;0];
+r2init = [0;-9e8;9e8];      v2init = [100;-300;-900];
+r3init = [13e8;-4e8;1e8];   v3init = [-300;-200;300];
+r4init = [-12e8;5e7;-9e8];  v4init = [-800;200;400];
+r5init = [1e9;1.2e9;-6e8];  v5init = [80;-900;50];
+r6init = [-1e8;7e8;1.2e9];    v6init = [400;400;-500];
+svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init;r5init;v5init;r6init;v6init];
+
+Stable four body with symmetry in 2d
+mSun = 1.989e30;
+m = [mSun/3 mSun/3 mSun/3 mSun/3];
+r1init = [1e9;0]; r2init = [0;1e8]; r3init = [-1e9;0];  r4init = [0;-1e8];
+v1init = [0;-5]; v2init = [4.6;0];  v3init = [0;5]; v4init = [-4.6;0];
+svinit = [r1init;v1init;r2init;v2init;r3init;v3init;r4init;v4init];
+
+Let me know if you find any good ones!
