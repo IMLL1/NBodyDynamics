@@ -35,6 +35,7 @@ end
 ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-5);
 [t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, svinit, ops);
 
+%% Prepare plots
 x = zeros(length(t),numbods);
 y = zeros(length(t),numbods);
 vx = zeros(length(t),numbods);
@@ -56,8 +57,11 @@ if(useTex)
 else
     interp = "tex";
 end
-
+H = linspace(0,1-1/numbods,numbods)';   % hue
+colors = hsv2rgb([H, ones(size(H)), .75*ones(size(H))]); %color order
 %% Paths
+figure;
+colororder(colors)
 plot(x, y, '-');
 lgtxt = [];
 for idx=1:numbods
@@ -69,7 +73,8 @@ xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$
 xl = xlim; yl=ylim;
 %% Animation
 figure;
-objs = plot(nan,nan, 'ko'); animAx = gca; colors = get(gca, 'ColorOrder');
+colororder(colors)
+objs = plot(nan,nan, 'ko'); animAx = gca;
 xlim(xl); ylim(yl);
 title("Body Locations", Interpreter=interp); subtitle("$$t=0$$ years", Interpreter=interp);
 xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$) [km]", Interpreter=interp);

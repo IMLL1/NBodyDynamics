@@ -42,6 +42,7 @@ end
 ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-2);
 [t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, svinit, ops);
 
+%% Prepare plots
 x = zeros(length(t),numbods);
 y = zeros(length(t),numbods);
 z = zeros(length(t),numbods);
@@ -67,9 +68,11 @@ if(useTex)
 else
     interp = "tex";
 end
-colororder('gem12');
+H = linspace(0,1-1/numbods,numbods)';   % hue
+colors = hsv2rgb([H, ones(size(H)), .75*ones(size(H))]); %color order
 %% Paths
 figure;
+colororder(colors);
 plot3(x, y, z, '-'); set(gcf, "color", 'w');
 lgtxt = {};
 for idx=1:numbods
@@ -83,7 +86,8 @@ title(numbods+"-Body Sim", Interpreter=interp); axis equal;grid on;
 [az, el] = view; xl = xlim; yl=ylim; zl=zlim;
 %% Animation
 figure; set(gcf, "color", 'w');
-objs = plot3(xl',yl',zl', 'ko'); animAx = gca; colors = get(gca, 'ColorOrder');
+colororder(colors);
+objs = plot3(xl',yl',zl', 'ko'); animAx = gca;
 axis equal; grid;
 title(numbods+"-Body Sim", Interpreter=interp); subtitle("$$t=0$$ years", Interpreter=interp);
 set(gca,'TickLabelInterpreter',interp)
