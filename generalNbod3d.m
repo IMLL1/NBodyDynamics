@@ -18,7 +18,7 @@ tEnd = seconds(years(2));           % End time
 tScale = seconds(years(1/12));      % aim for 1 month per four second
 dt = seconds(days(1/2));            % 2 frame per day
 fps = 30;                     % framerate to aim for in animation
-trailLength = seconds(years(10));   % How long trails should live. Set to inf to not erase them
+trailLifetime = seconds(years(10));   % How long trails should live. Set to inf to not erase them
 rotrate = 15; % deg/sec rotate
 
 useCoM = true;  % whether to use CoM as origin
@@ -101,7 +101,7 @@ axis equal; grid;
 title(numbods+"-Body Sim", Interpreter=interp); subtitle("$$t=0$$ years", Interpreter=interp);
 set(gca,'TickLabelInterpreter',interp)
 for idx=1:numbods
-    al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:), "MaximumNumPoints",lifetime/dt);
+    al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:), "MaximumNumPoints",trailLifetime/dt);
 end
 lg=legend(["", lgtxt],Interpreter=interp,Location="eastoutside", box="off");
 lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";

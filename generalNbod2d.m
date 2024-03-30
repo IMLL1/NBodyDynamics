@@ -12,7 +12,7 @@ tEnd = seconds(years(50));    % sim for 50 years
 tScale = seconds(years(2));   % aim for a year per second
 dt = seconds(years(1/200));   % 200 frames per year
 fps = 30;                     % framerate to aim for in animation
-trailLength = seconds(years(10));   % How long trails should live. Set to inf to not erase them
+trailLifetime = seconds(years(10));   % How long trails should live. Set to inf to not erase them
 
 useCoM = true;  % whether to use CoM as origin
 useTex = true;  % whether to use tex labels (otherwise MATLAB labels)
@@ -93,7 +93,7 @@ title("Body Locations", Interpreter=interp); subtitle("$$t=0$$ years", Interpret
 xlabel("X Position ($$x$$) [km]", Interpreter=interp); ylabel("Y Position ($$y$$) [km]", Interpreter=interp);
 set(gca,'TickLabelInterpreter',interp)
 for idx=1:numbods
-    al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:), "MaximumNumPoints",lifetime/dt);
+    al(idx) = animatedline("LineWidth", 0.1,"Color",colors(idx,:), "MaximumNumPoints",trailLifetime/dt);
 end
 lg=legend(["", lgtxt],Interpreter=interp,Location="eastoutside", box="off");
 lg.ItemTokenSize=[10 5]; lg.Title.String="Masses [kg]";
