@@ -34,8 +34,17 @@ if(numbods ~= length(sv)/4)
     error("Improper inputs. Check to make sure your state vector has 4x as many elements as your masses");
 end
 
-ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-5);
-[t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, sv, ops);
+try
+    DEobj = ode(ODEFcn=@(t,sv)dynamics(t,sv,m,numbods), InitialValue=sv);
+    DEobj.RelativeTolerance=1e-10; DEobj.AbsoluteTolerance=1e-3;
+    soln = solve(DEobj, 0:dt:tEnd);
+    t= soln.Time;
+    SV = soln.Solution;
+catch ME
+    warn("You should update to R2024 for a faster solver");
+    ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-3);
+    [t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, sv, ops);
+end
 
 %% Prepare plots
 x = zeros(length(t),numbods);
