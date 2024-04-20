@@ -70,6 +70,9 @@ else
 end
 H = linspace(0,1-1/numbods,numbods)';   % hue
 colors = hsv2rgb([H, ones(size(H)), (.75+0.25*useDarkMode)*ones(size(H))]); %color order
+if useDarkMode
+    colors = (colors + [ones(size(H)),ones(size(H)),ones(size(H))])/2;
+end
 %% Paths
 figure;
 colororder(colors)
