@@ -48,7 +48,7 @@ try
     t= soln.Time;
     SV = soln.Solution';
 catch ME
-    warn("You should update to R2024 for a faster solver");
+    warning("You should update to R2024 for a faster solver");
     ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-3);
     [t,SV] = ode45(@(t,sv) dynamics(t,sv, m, numbods), 0:dt:tEnd, sv, ops);
 end
