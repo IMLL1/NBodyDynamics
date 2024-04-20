@@ -46,7 +46,7 @@ try
     DEobj.RelativeTolerance=1e-10; DEobj.AbsoluteTolerance=1e-3;
     soln = solve(DEobj, 0:dt:tEnd);
     t= soln.Time;
-    SV = soln.Solution;
+    SV = soln.Solution';
 catch ME
     warn("You should update to R2024 for a faster solver");
     ops = odeset('RelTol', 1e-10, 'AbsTol', 1e-3);
