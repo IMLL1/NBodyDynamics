@@ -1,6 +1,6 @@
-numbod = 25         # Number of planetary bodies
+numbod = 8         # Number of planetary bodies
 numdim = 3          # Number of dimensions total
-expanded = False    # Whether to expand summations in the dynamics matrix (don't do this for numbod > around 10)
+expanded = True    # Whether to expand summations in the dynamics matrix (don't do this for numbod > around 10)
 makeTxt = False     # Whether to putput txt file
 makeTex = True      # whether to putput Tex file
 
