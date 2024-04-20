@@ -139,7 +139,7 @@ close(animation);   % ANIMATIONCOMMENT
 %% Helper function
 % it works, don't touch
 function dsv = dynamics(t, sv, m, num)
-G = 6.6743e-20; % division to convert to km as base distance unit
+G = 6.6743e-20;
 dynMtx = zeros(4*num,4*num);
 for targetnum = 1:num
     dynMtx((targetnum-1)*4+[1,2],(targetnum-1)*4+[3,4]) = eye(2);
